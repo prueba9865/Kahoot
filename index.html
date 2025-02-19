@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <img src="img/logo.png" alt="logo">
+    <p>Alberto Ucendo Martínez</p>
+    <select id="selector">
+        <option value="">--Selecciona una opción--</option>
+        <option value="culturaGeneral">Cultura General</option>
+        <option value="historia">Historia</option>
+        <option value="geografia">Geografía</option>
+        <option value="deportes">Deportes</option>
+    </select>
+
+    <!-- Popup -->
+    <div class="overlay" id="popupOverlay">
+        <div class="popup" id="popupContent">
+        </div>
+    </div>
+
+    <script>
+        function cerrarPopup() {
+            document.getElementById("popupOverlay").style.display = "none";
+        }
+
+        let select = document.getElementById("selector");
+
+        select.addEventListener("change", () => {
+            if (select.value === "") {
+                alert("Debes elegir una opción");
+            } else if (select.value === "culturaGeneral") {
+                let div = document.getElementById("popupContent");
+                div.innerHTML = ""; // Limpiar contenido previo
+
+                let h2 = document.createElement("h2");
+                h2.textContent = "Preguntas sobre Cultura General";
+                div.appendChild(h2);
+
+                let fieldset = document.createElement("fieldset");
+                div.appendChild(fieldset);
+
+                let legend = document.createElement("legend");
+                legend.textContent = "¿Cuál es el país más grande del mundo por territorio?";
+                fieldset.appendChild(legend);
+
+                let opciones = [
+                    { id: "rusia", texto: "Rusia" },
+                    { id: "francia", texto: "Francia" },
+                    { id: "españa", texto: "España" },
+                    { id: "italia", texto: "Italia" }
+                ];
+
+                opciones.forEach(opcion => {
+                    let divOpcion = document.createElement("div");
+                    fieldset.appendChild(divOpcion);
+
+                    let input = document.createElement("input");
+                    input.type = "radio";
+                    input.id = opcion.id;
+                    input.name = "pais"; // Agrupación correcta
+                    input.value = opcion.id;
+                    divOpcion.appendChild(input);
+
+                    let label = document.createElement("label");
+                    label.htmlFor = opcion.id;
+                    label.textContent = opcion.texto;
+                    divOpcion.appendChild(label);
+                });
+
+                let buttonEnviar = document.createElement("button");
+                buttonEnviar.textContent = "Enviar";
+                buttonEnviar.onclick = () => alert("Respuesta enviada");
+                div.appendChild(buttonEnviar);
+
+                let buttonCancelar = document.createElement("button");
+                buttonCancelar.className = "close-btn";
+                buttonCancelar.textContent = "Cerrar";
+                buttonCancelar.onclick = cerrarPopup;
+                div.appendChild(buttonCancelar);
+
+                // Mostrar el popup
+                document.getElementById("popupOverlay").style.display = "flex";
+            }
+        });
+    </script>
+</body>
+</html>
