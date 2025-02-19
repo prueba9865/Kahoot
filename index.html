@@ -24,6 +24,15 @@
     </div>
 
     <script>
+
+        function verificarDatos(opcion){
+            if(opcion == "rusia"){
+                alert("ACERTASTE")
+            } else{
+                alert("FALLASTE")
+            }
+        }
+
         function cerrarPopup() {
             document.getElementById("popupOverlay").style.display = "none";
         }
@@ -74,7 +83,15 @@
 
                 let buttonEnviar = document.createElement("button");
                 buttonEnviar.textContent = "Enviar";
-                buttonEnviar.onclick = () => alert("Respuesta enviada");
+                buttonEnviar.onclick = function() {
+                    let seleccion = document.querySelector('input[name="pais"]:checked');
+
+                    if (seleccion) {
+                        verificarDatos(seleccion.value);
+                    } else {
+                        alert("Debes seleccionar una opción antes de enviar.");
+                    }
+                };
                 div.appendChild(buttonEnviar);
 
                 let buttonCancelar = document.createElement("button");
