@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuestionario</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <img src="img/logo.png" alt="logo">
-    <p>Alberto Ucendo Martínez</p>
+    <img src="img/logo.png" alt="logo" id="logo">
+    <h1>Cuestionario Interactivo</h1>
+    <p id="nombre">Alberto Ucendo Martínez</p>
+
     <select id="selector">
-        <option value="">--Selecciona una opción--</option>
+        <option value="">--Selecciona un test--</option>
         <option value="culturaGeneral">Cultura General</option>
         <option value="historia">Historia</option>
         <option value="deportes">Deportes</option>
@@ -20,263 +20,18 @@
 
     <!-- Popup -->
     <div class="overlay" id="popupOverlay">
-        <div class="popup" id="popupContent">
-        </div>
+        <div class="popup" id="popupContent"></div>
     </div>
 
-    <script>
-        // Array de preguntas por tema
-        const preguntas = {
-            culturaGeneral: [
-                {
-                    pregunta: "¿Cuál es el país más grande del mundo por territorio?",
-                    opciones: [
-                        { id: "rusia", texto: "Rusia" },
-                        { id: "francia", texto: "Francia" },
-                        { id: "españa", texto: "España" },
-                        { id: "italia", texto: "Italia" }
-                    ],
-                    respuestaCorrecta: "rusia"
-                },
-                {
-                    pregunta: "¿Cuál es la capital de Japón?",
-                    opciones: [
-                        { id: "tokio", texto: "Tokio" },
-                        { id: "seul", texto: "Seúl" },
-                        { id: "beijing", texto: "Beijing" },
-                        { id: "bangkok", texto: "Bangkok" }
-                    ],
-                    respuestaCorrecta: "tokio"
-                },
-                {
-                    pregunta: "¿En qué continente está Brasil?",
-                    opciones: [
-                        { id: "asia", texto: "Asia" },
-                        { id: "africa", texto: "África" },
-                        { id: "america", texto: "América" },
-                        { id: "oceania", texto: "Oceanía" }
-                    ],
-                    respuestaCorrecta: "america"
-                },
-                {
-                    pregunta: "¿Cuál es el río más largo del mundo?",
-                    opciones: [
-                        { id: "amazonas", texto: "Amazonas" },
-                        { id: "nilo", texto: "Nilo" },
-                        { id: "misisipi", texto: "Misisipi" },
-                        { id: "danubio", texto: "Danubio" }
-                    ],
-                    respuestaCorrecta: "amazonas"
-                },
-                {
-                    pregunta: "¿En qué país se encuentra la Torre Eiffel?",
-                    opciones: [
-                        { id: "francia", texto: "Francia" },
-                        { id: "italia", texto: "Italia" },
-                        { id: "alemania", texto: "Alemania" },
-                        { id: "españa", texto: "España" }
-                    ],
-                    respuestaCorrecta: "francia"
-                }
-            ],
-            historia: [
-                {
-                    pregunta: "¿En qué año cayó el Imperio Romano de Occidente?",
-                    opciones: [
-                        { id: "476 d.C", texto: "476 d.C" },
-                        { id: "500 d.C", texto: "500 d.C" },
-                        { id: "395 d.C", texto: "395 d.C" },
-                        { id: "1453 d.C", texto: "1453 d.C" }
-                    ],
-                    respuestaCorrecta: "476 d.C"
-                },
-                {
-                    pregunta: "¿Quién fue el primer emperador romano?",
-                    opciones: [
-                        { id: "augusto", texto: "Augusto" },
-                        { id: "nero", texto: "Nerón" },
-                        { id: "julio", texto: "Julio César" },
-                        { id: "trajano", texto: "Trajano" }
-                    ],
-                    respuestaCorrecta: "augusto"
-                },
-                {
-                    pregunta: "¿En qué año se descubrió América?",
-                    opciones: [
-                        { id: "1492", texto: "1492" },
-                        { id: "1500", texto: "1500" },
-                        { id: "1521", texto: "1521" },
-                        { id: "1410", texto: "1410" }
-                    ],
-                    respuestaCorrecta: "1492"
-                },
-                {
-                    pregunta: "¿Quién fue el responsable de la caída de Constantinopla?",
-                    opciones: [
-                        { id: "mahomed ii", texto: "Mahomed II" },
-                        { id: "alejandro", texto: "Alejandro Magno" },
-                        { id: "hispano", texto: "Hispano" },
-                        { id: "constantino", texto: "Constantino" }
-                    ],
-                    respuestaCorrecta: "mahomed ii"
-                },
-                {
-                    pregunta: "¿Qué imperio existió en Mesopotamia?",
-                    opciones: [
-                        { id: "persa", texto: "Persa" },
-                        { id: "egipcio", texto: "Egipcio" },
-                        { id: "babilonio", texto: "Babilonio" },
-                        { id: "griego", texto: "Griego" }
-                    ],
-                    respuestaCorrecta: "babilonio"
-                }
-            ],
-            deportes: [
-                {
-                    pregunta: "¿En qué deporte se utiliza el término \"golpe de derecha\"?",
-                    opciones: [
-                        { id: "tenis", texto: "Tenis" },
-                        { id: "futbol", texto: "Fútbol" },
-                        { id: "baloncesto", texto: "Baloncesto" },
-                        { id: "golf", texto: "Golf" }
-                    ],
-                    respuestaCorrecta: "tenis"
-                },
-                {
-                    pregunta: "¿Quién tiene el récord de más goles en la historia de la Copa del Mundo?",
-                    opciones: [
-                        { id: "messi", texto: "Messi" },
-                        { id: "pele", texto: "Pelé" },
-                        { id: "cristiano", texto: "Cristiano Ronaldo" },
-                        { id: "klose", texto: "Miroslav Klose" }
-                    ],
-                    respuestaCorrecta: "klose"
-                },
-                {
-                    pregunta: "¿En qué deporte se realiza un \"hatrick\"?",
-                    opciones: [
-                        { id: "futbol", texto: "Fútbol" },
-                        { id: "tenis", texto: "Tenis" },
-                        { id: "hockey", texto: "Hockey" },
-                        { id: "rugby", texto: "Rugby" }
-                    ],
-                    respuestaCorrecta: "futbol"
-                },
-                {
-                    pregunta: "¿En qué país se originó el fútbol?",
-                    opciones: [
-                        { id: "inglaterra", texto: "Inglaterra" },
-                        { id: "brazil", texto: "Brasil" },
-                        { id: "españa", texto: "España" },
-                        { id: "argentina", texto: "Argentina" }
-                    ],
-                    respuestaCorrecta: "inglaterra"
-                },
-                {
-                    pregunta: "¿Cuál es el deporte más popular en los Estados Unidos?",
-                    opciones: [
-                        { id: "futbol", texto: "Fútbol" },
-                        { id: "baloncesto", texto: "Baloncesto" },
-                        { id: "beisbol", texto: "Béisbol" },
-                        { id: "hockey", texto: "Hockey sobre hielo" }
-                    ],
-                    respuestaCorrecta: "baloncesto"
-                }
-            ]
-        };
+    <!-- Resultados -->
+    <div id="resultados" style="display:none;">
+        <h2>Resultados</h2>
+        <p id="respuestasCorrectas"></p>
+        <p id="respuestasIncorrectas"></p>
+        <p id="puntosTotales"></p>
+        <button onclick="reiniciarTest()">Volver a empezar</button>
+    </div>
 
-        // Función para generar las preguntas dinámicamente
-        function generarPregunta(div, tema, preguntaIndex) {
-            let pregunta = preguntas[tema][preguntaIndex];
-            div.innerHTML = ""; // Limpiar contenido previo
-
-            let cont = 5;
-            let p = document.createElement("p");
-
-            const intervalo = setInterval(() => {
-                document.getElementById("popupOverlay").style.display = "flex";
-                p.textContent = cont;
-                div.appendChild(p);
-                cont--;
-
-                if (cont < 0) {
-                    clearInterval(intervalo);
-                    p.textContent = "";
-                    let h2 = document.createElement("h2");
-                    h2.textContent = tema.charAt(0).toUpperCase() + tema.slice(1); // Primer letra en mayúscula
-                    div.appendChild(h2);
-
-                    let fieldset = document.createElement("fieldset");
-                    div.appendChild(fieldset);
-
-                    let legend = document.createElement("legend");
-                    legend.textContent = pregunta.pregunta;
-                    fieldset.appendChild(legend);
-
-                    pregunta.opciones.forEach(opcion => {
-                        let divOpcion = document.createElement("div");
-                        fieldset.appendChild(divOpcion);
-
-                        let input = document.createElement("input");
-                        input.type = "radio";
-                        input.id = opcion.id;
-                        input.name = tema + preguntaIndex; // Agrupación correcta
-                        input.value = opcion.id;
-                        divOpcion.appendChild(input);
-
-                        let label = document.createElement("label");
-                        label.htmlFor = opcion.id;
-                        label.textContent = opcion.texto;
-                        divOpcion.appendChild(label);
-                    });
-
-                    let buttonEnviar = document.createElement("button");
-                    buttonEnviar.textContent = "Enviar";
-                    buttonEnviar.onclick = function () {
-                        let seleccion = document.querySelector(`input[name="${tema + preguntaIndex}"]:checked`);
-
-                        if (seleccion) {
-                            if (seleccion.value === pregunta.respuestaCorrecta) {
-                                alert("¡ACERTASTE!");
-                                if (preguntaIndex < preguntas[tema].length - 1) {
-                                    generarPregunta(div, tema, preguntaIndex + 1);
-                                } else {
-                                    alert("¡Has terminado el cuestionario!");
-                                    cerrarPopup();
-                                }
-                            } else {
-                                alert("FALLASTE. Intenta de nuevo.");
-                            }
-                        } else {
-                            alert("Debes seleccionar una opción antes de enviar.");
-                        }
-                    };
-                    div.appendChild(buttonEnviar);
-
-                    let buttonCancelar = document.createElement("button");
-                    buttonCancelar.className = "close-btn";
-                    buttonCancelar.textContent = "Cerrar";
-                    buttonCancelar.onclick = cerrarPopup;
-                    div.appendChild(buttonCancelar);
-                }
-            }, 1000);
-        }
-
-        function cerrarPopup() {
-            document.getElementById("popupOverlay").style.display = "none";
-        }
-
-        let select = document.getElementById("selector");
-
-        select.addEventListener("change", () => {
-            if (select.value === "") {
-                alert("Debes elegir una opción");
-            } else {
-                let div = document.getElementById("popupContent");
-                generarPregunta(div, select.value, 0);
-            }
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
-
 </html>
