@@ -121,6 +121,7 @@ function startCountdown() {
       clearInterval(countdownInterval);
       showQuestion();
     } else {
+        document.getElementById('timer').textContent = countdown
       console.log(`El juego comenzará en ${countdown} segundos...`);
       countdown--;
     }
