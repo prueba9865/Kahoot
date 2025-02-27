@@ -1,68 +1,29 @@
-{
-  "culturaGeneral": [
-      {
-          "pregunta": "¿Quién pintó la Mona Lisa?",
-          "opciones": [
-              { "id": "1", "texto": "Pablo Picasso" },
-              { "id": "2", "texto": "Vincent van Gogh" },
-              { "id": "3", "texto": "Leonardo da Vinci" },
-              { "id": "4", "texto": "Claude Monet" }
-          ],
-          "respuestaCorrecta": "3"
-      },
-      {
-          "pregunta": "¿Qué continente está en el hemisferio sur?",
-          "opciones": [
-              { "id": "1", "texto": "Asia" },
-              { "id": "2", "texto": "Australia" },
-              { "id": "3", "texto": "Europa" },
-              { "id": "4", "texto": "América del Norte" }
-          ],
-          "respuestaCorrecta": "2"
-      }
-  ],
-  "historia": [
-      {
-          "pregunta": "¿En qué año terminó la Segunda Guerra Mundial?",
-          "opciones": [
-              { "id": "1", "texto": "1941" },
-              { "id": "2", "texto": "1945" },
-              { "id": "3", "texto": "1950" },
-              { "id": "4", "texto": "1939" }
-          ],
-          "respuestaCorrecta": "2"
-      },
-      {
-          "pregunta": "¿Quién fue el primer presidente de Estados Unidos?",
-          "opciones": [
-              { "id": "1", "texto": "George Washington" },
-              { "id": "2", "texto": "Abraham Lincoln" },
-              { "id": "3", "texto": "Thomas Jefferson" },
-              { "id": "4", "texto": "John Adams" }
-          ],
-          "respuestaCorrecta": "1"
-      }
-  ],
-  "deportes": [
-      {
-          "pregunta": "¿Quién ganó el Mundial de Fútbol 2018?",
-          "opciones": [
-              { "id": "1", "texto": "Francia" },
-              { "id": "2", "texto": "Brasil" },
-              { "id": "3", "texto": "Alemania" },
-              { "id": "4", "texto": "España" }
-          ],
-          "respuestaCorrecta": "1"
-      },
-      {
-          "pregunta": "¿Cuántos goles marcó Messi en el Mundial 2014?",
-          "opciones": [
-              { "id": "1", "texto": "5" },
-              { "id": "2", "texto": "6" },
-              { "id": "3", "texto": "7" },
-              { "id": "4", "texto": "4" }
-          ],
-          "respuestaCorrecta": "1"
-      }
+[
+    {
+      "id": 1,
+      "name": "Test de Historia",
+      "questions": [
+        {
+          "question": "¿Quién descubrió América?",
+          "options": ["Cristóbal Colón", "Napoleón", "Einstein", "Messi"],
+          "correct": 0
+        },
+        {
+          "question": "¿En qué año terminó la Segunda Guerra Mundial?",
+          "options": ["1945", "1939", "1918", "1950"],
+          "correct": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Test de Ciencia",
+      "questions": [
+        {
+          "question": "¿Cuál es el símbolo químico del agua?",
+          "options": ["H2O", "CO2", "O2", "NaCl"],
+          "correct": 0
+        }
+      ]
+    }
   ]
-}
