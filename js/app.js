@@ -44,6 +44,8 @@ document.getElementById('start-btn').addEventListener('click', () => {
 
 // Mostrar la pregunta actual
 function showQuestion() {
+  clearInterval(timer);
+
   const question = currentTest.questions[currentQuestionIndex];
   document.getElementById('question').textContent = question.question;
 
@@ -60,12 +62,21 @@ function showQuestion() {
   startTimer();
 }
 
-// Verificar la respuesta
+// Revision de las preguntas
 function checkAnswer(selectedIndex) {
   clearInterval(timer);
-  const question = currentTest.questions[currentQuestionIndex];
-  const timeLeft = parseInt(document.getElementById('timer').textContent);
 
+  // Obtener el tiempo restante desde el temporizador
+  const timerElement = document.getElementById('question-timer');
+  const match = timerElement.textContent.match(/\d+/);
+  let timeLeft = 0;
+
+  if (match) {
+    timeLeft = parseInt(match[0], 10);
+  }
+
+  // Verificar la respuesta
+  const question = currentTest.questions[currentQuestionIndex];
   if (selectedIndex === question.correct) {
     correctAnswers++;
     totalPoints += (10 - timeLeft) * 100;
@@ -73,6 +84,7 @@ function checkAnswer(selectedIndex) {
     wrongAnswers++;
   }
 
+  // Pasar a la siguiente pregunta o finalizar el juego
   currentQuestionIndex++;
   if (currentQuestionIndex < currentTest.questions.length) {
     showQuestion();
@@ -81,18 +93,19 @@ function checkAnswer(selectedIndex) {
   }
 }
 
-// Iniciar el temporizador
+// Temporizador de 10 segundos para cada pregunta
 function startTimer() {
+  clearInterval(timer);
   let timeLeft = 10;
-  document.getElementById('timer').textContent = timeLeft;
+  document.getElementById('question-timer').textContent = `Tiempo restante: ${timeLeft} segundos`;
 
   timer = setInterval(() => {
     timeLeft--;
-    document.getElementById('timer').textContent = timeLeft;
+    document.getElementById('question-timer').textContent = `Tiempo restante: ${timeLeft} segundos`;
 
     if (timeLeft <= 0) {
       clearInterval(timer);
-      checkAnswer(null); // Tiempo agotado
+      checkAnswer(null); // Tiempo agotado, se trata como respuesta nula
     }
   }, 1000);
 }
@@ -113,15 +126,19 @@ document.getElementById('restart-btn').addEventListener('click', () => {
   document.getElementById('start-screen').style.display = 'block';
 });
 
-// Contador inicial de 5 segundos
+// Countdown inicial de 5 segundos
 function startCountdown() {
+  clearInterval(timer);
   let countdown = 5;
+  document.getElementById('countdown-timer').textContent = `Tiempo restante: ${countdown} segundos`;
+  
   const countdownInterval = setInterval(() => {
     if (countdown <= 0) {
       clearInterval(countdownInterval);
+      document.getElementById('countdown-timer').textContent = ''; // Limpia el countdown
       showQuestion();
     } else {
-        document.getElementById('timer').textContent = countdown
+      document.getElementById('countdown-timer').textContent = `Tiempo restante: ${countdown} segundos`;
       console.log(`El juego comenzará en ${countdown} segundos...`);
       countdown--;
     }
